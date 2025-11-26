@@ -139,17 +139,17 @@ const diagnoseAI = {
                                     results.recommendations.priority === 'High' 
                                     ? 'bg-red-100 text-red-800' 
                                     : 'bg-green-100 text-green-800'
-                                }">${results.recommendations.priority}</span>
+                                }"><span class="recommendation-value">${results.recommendations.priority}</span></span>
                             </div>
                             <div class="flex items-center">
                                 <span class="text-sm font-medium w-24">Follow-up:</span>
-                                <span class="text-sm">${results.recommendations.followUp}</span>
+                                <span class="text-sm recommendation-value">${results.recommendations.followUp}</span>
                             </div>
                             <div>
                                 <span class="text-sm font-medium">Additional Tests:</span>
                                 <ul class="list-disc list-inside mt-1">
                                     ${results.recommendations.additionalTests.map(test => `
-                                        <li class="text-sm">${test}</li>
+                                        <li class="text-sm recommendation-value">${test}</li>
                                     `).join('')}
                                 </ul>
                             </div>

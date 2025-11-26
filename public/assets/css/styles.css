@@ -150,6 +150,16 @@ body.dark .recommendation-text {
     color: #7ee7f5 !important;
 }
 
+/* Recommendation value styling (specific values turned blue/cyan) */
+.recommendation-value {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+body.dark .recommendation-value {
+    color: #7ee7f5 !important;
+}
+
 /* Stat values */
 .stat-value { color: var(--text-primary); font-weight: 700; }
 .stat-label { color: var(--text-secondary); }
