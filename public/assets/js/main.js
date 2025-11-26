@@ -121,10 +121,10 @@ const diagnoseAI = {
                     <!-- Qualitative Analysis -->
                     <div class="mb-6">
                         <h5 class="text-lg font-semibold mb-3">Qualitative Analysis</h5>
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <pre class="whitespace-pre-wrap text-sm">${results.qualitativeAnalysis.findings}</pre>
+                        <div class="p-4 rounded-lg">
+                            <pre class="qualitative-text whitespace-pre-wrap text-sm">${results.qualitativeAnalysis.findings}</pre>
                         </div>
-                        <p class="mt-2 text-sm text-gray-600">
+                        <p class="mt-2 text-sm text-secondary">
                             Confidence: ${results.qualitativeAnalysis.confidence}
                         </p>
                     </div>
@@ -132,7 +132,7 @@ const diagnoseAI = {
                     <!-- Recommendations -->
                     <div>
                         <h5 class="text-lg font-semibold mb-3">Recommendations</h5>
-                        <div class="space-y-2">
+                        <div class="space-y-2 recommendation-text">
                             <div class="flex items-center">
                                 <span class="text-sm font-medium w-24">Priority:</span>
                                 <span class="px-2 py-1 rounded text-sm ${
@@ -255,3 +255,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Theme toggle functionality
+diagnoseAI.theme = {
+    current: null,
+    init() {
+        const saved = localStorage.getItem('diagnoseai_theme');
+        if (saved === 'light') document.body.classList.remove('dark'), document.body.classList.add('light');
+        else document.body.classList.remove('light'), document.body.classList.add('dark');
+        this.current = document.body.classList.contains('light') ? 'light' : 'dark';
+        this.applyIcon();
+        // Attach toggle button if present
+        const btn = document.getElementById('themeToggle');
+        if (btn) btn.addEventListener('click', () => this.toggle());
+    },
+
+    toggle() {
+        if (this.current === 'dark') {
+            document.body.classList.remove('dark');
+            document.body.classList.add('light');
+            this.current = 'light';
+        } else {
+            document.body.classList.remove('light');
+            document.body.classList.add('dark');
+            this.current = 'dark';
+        }
+        localStorage.setItem('diagnoseai_theme', this.current);
+        this.applyIcon();
+    },
+
+    applyIcon() {
+        const btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        btn.innerHTML = this.current === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+};
+
+// Initialize theme after DOM is ready
+document.addEventListener('DOMContentLoaded', () => diagnoseAI.theme.init());

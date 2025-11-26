@@ -18,6 +18,43 @@
     --glass: rgba(255,255,255,0.03);
 }
 
+/* Light theme variable overrides when `body` has `.light` */
+body.light {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary-color: #64748b;
+    --success-color: #16a34a;
+
+    --text-primary: #0f172a; /* dark text */
+    --text-secondary: #475569; /* muted dark */
+    --bg-light: #f8fafc;
+    --bg-panel: #ffffff;
+    --muted-panel: #ffffff;
+    --glass: rgba(2,6,23,0.04);
+}
+
+/* Re-usable panel class to replace `bg-white` usages */
+.panel {
+    background-color: var(--bg-panel);
+    color: var(--text-secondary);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.25);
+}
+
+/* Topbar variant */
+.topbar {
+    background-color: var(--bg-panel);
+    color: var(--text-secondary);
+    border-radius: 0.5rem;
+}
+
+/* Utility to emphasize primary text inside panels */
+.panel .lead, .lead {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
 /* Global typography and accessible color adjustments */
 body {
     font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -87,6 +124,30 @@ a:hover, a:focus {
     background: transparent;
     font-size: 0.95rem;
     white-space: pre-wrap;
+}
+
+/* Qualitative analysis text coloring: blue in light mode, white in dark mode */
+.qualitative-text {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    white-space: pre-wrap;
+}
+
+body.light .qualitative-text {
+    color: var(--primary-color) !important;
+}
+
+body.dark .qualitative-text {
+    color: #ffffff !important;
+}
+
+/* Recommendation text: blue in light mode, lighter cyan in dark mode */
+.recommendation-text {
+    color: var(--primary-color);
+}
+
+body.dark .recommendation-text {
+    color: #7ee7f5 !important;
 }
 
 /* Stat values */
@@ -419,4 +480,90 @@ a:hover, a:focus {
 /* Make analysis results text white for clarity */
 .analysis-card, .analysis-card pre, .analysis-card p, .analysis-card .analysis-stat-value {
     color: var(--text-primary) !important;
+}
+
+/* Additional forceful overrides for remaining light utility classes */
+/* Convert any bg-white inside main/sidebar to dark panel and ensure nested text is light */
+.main-content .bg-white, .sidebar .bg-white {
+    background-color: var(--muted-panel) !important;
+    color: var(--text-secondary) !important;
+}
+.main-content .bg-white * , .sidebar .bg-white * {
+    color: inherit !important;
+}
+
+/* Specific text-gray utility overrides for improved contrast */
+.main-content .text-gray-600, .main-content .text-gray-500, .main-content .text-gray-400,
+.main-content .text-gray-800, .sidebar .text-gray-600, .sidebar .text-gray-500,
+.sidebar .text-gray-800 {
+    color: var(--text-secondary) !important;
+}
+
+/* Make stronger primary content text fully bright white-ish for readability */
+.main-content .text-2xl, .main-content h2, .main-content h3, .main-content h4,
+.main-content .font-bold, .main-content .font-semibold {
+    color: var(--text-primary) !important;
+}
+
+/* Force primary buttons to retain visible background and text */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    color: #042427 !important;
+    border: none !important;
+}
+
+/* Ensure any inline labels that used red/blue utilities display clearly */
+.sidebar .text-red-600 { color: #ff7b7b !important; }
+.main-content .text-blue-600 { color: var(--primary-color) !important; }
+
+/* Override Tailwind 'hover:bg-red-50' & similar pale hover utils in sidebar */
+.sidebar button[class*="hover:bg-red-50"], .sidebar .hover\:bg-red-50 {
+    background-color: transparent !important;
+}
+
+/* Ensure small muted text is readable */
+.main-content .text-sm, .sidebar .text-sm { color: rgba(255,255,255,0.72) !important; }
+
+/* Fix inputs and labels inside panels */
+.main-content input, .main-content textarea, .main-content select, .main-content label {
+    color: var(--text-primary) !important;
+}
+
+/* Dashboard-specific: force panel/content text to dark/black for readability */
+.main-content .panel, .main-content .panel * {
+    color: #071421 !important;
+}
+
+/* Ensure headings in dashboard panels are also dark */
+.main-content .panel h1, .main-content .panel h2, .main-content .panel h3,
+.main-content .panel h4, .main-content .panel .lead {
+    color: #071421 !important;
+}
+
+/* Force any utility `text-white` inside dashboard to blue for emphasis */
+.main-content .text-white, .sidebar .text-white {
+    color: var(--primary-color) !important;
+}
+
+/* Default dashboard text (paragraphs, labels, spans, list items) -> black for readability */
+.main-content p, .main-content span, .main-content li, .main-content label, .main-content a {
+    color: #071421 !important;
+}
+
+/* Headings and emphasized text remain black */
+.main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content .lead {
+    color: #071421 !important;
+}
+
+/* Buttons: primary buttons keep dark text, secondary buttons use primary blue */
+.main-content .btn-primary {
+    color: #042427 !important;
+}
+.main-content .btn-secondary {
+    color: var(--primary-color) !important;
+}
+
+/* Icons rendered white should show primary blue inside dashboard */
+.main-content i[class*="fa-"], .sidebar i[class*="fa-"] {
+    color: var(--primary-color) !important;
 }

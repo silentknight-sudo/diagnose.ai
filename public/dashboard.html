@@ -92,37 +92,38 @@
         <!-- Main Content -->
         <main class="main-content">
             <!-- Top Bar -->
-            <div class="bg-white shadow-sm p-4 flex justify-between items-center mb-6">
+                <div class="topbar shadow-sm p-4 flex justify-between items-center mb-6">
                 <button id="mobileSidebarToggle" class="md:hidden text-gray-600">
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="flex items-center space-x-4">
-                    <button class="text-gray-600 hover:text-blue-600">
+                    <button class="text-secondary hover:text-primary" title="Notifications">
                         <i class="fas fa-bell"></i>
                     </button>
-                    <button class="text-gray-600 hover:text-blue-600">
+                    <button class="text-secondary hover:text-primary" title="Help">
                         <i class="fas fa-question-circle"></i>
                     </button>
+                    <button id="themeToggle" class="text-secondary p-2 rounded-md" title="Toggle theme"></button>
                 </div>
             </div>
 
             <!-- Dashboard Content -->
             <div class="px-4">
                 <!-- Welcome Section -->
-                <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-                    <h2 class="text-2xl font-bold mb-2">Welcome back, <span id="welcomeUserName">Dr. Demo User</span></h2>
-                    <p class="text-gray-600">Ready to analyze new medical images? Upload an image to get started.</p>
+                <div class="panel rounded-xl shadow-md p-6 mb-6">
+                    <h2 class="text-2xl font-bold mb-2 lead">Welcome back, <span id="welcomeUserName">Dr. Demo User</span></h2>
+                    <p class="">Ready to analyze new medical images? Upload an image to get started.</p>
                 </div>
 
                 <!-- Upload Section -->
-                <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-                    <h3 class="text-xl font-semibold mb-4">Upload Medical Image</h3>
+                <div class="panel rounded-xl shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-semibold mb-4 lead">Upload Medical Image</h3>
                     <form id="uploadForm" class="space-y-4" onsubmit="event.preventDefault();">
                         <div id="dropZone" class="upload-zone">
                             <div class="text-center">
                                 <i class="fas fa-cloud-upload-alt text-4xl text-blue-600 mb-2"></i>
                                 <p class="text-lg font-medium">Drag and drop your image here</p>
-                                <p class="text-sm text-gray-500">or</p>
+                                <p class="text-sm">or</p>
                                 <label class="btn-primary inline-block mt-2 cursor-pointer">
                                     <span>Browse Files</span>
                                     <input type="file" name="image" class="hidden" accept="image/*" onchange="diagnoseAI.analysis.uploadImage(this.files[0])">
